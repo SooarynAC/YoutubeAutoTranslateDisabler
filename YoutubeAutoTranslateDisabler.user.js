@@ -117,7 +117,7 @@
         }
       }
 
-      console.log(cachedTitles);
+      //console.log(cachedTitles);
       //console.log(cachedDescriptions);
 
       // Begin to update the DOM
