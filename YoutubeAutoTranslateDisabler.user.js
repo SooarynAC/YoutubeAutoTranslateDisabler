@@ -42,6 +42,12 @@
   var cachedDescriptions = {}; // (id, desc linkified TrustedHTML)
 
   function getVideoID(a) {
+    if (!a) {
+      return null;
+    }
+
+    //console.log(a)
+
     while (a.tagName != "A") {
       a = a.parentNode;
     }
@@ -58,11 +64,9 @@
     //console.log('CHANGING TITLES...');
 
     // REFERENCED VIDEO TITLES - find video link elements in the page that have not yet been changed
-    var links = Array.prototype.slice.call(document.getElementsByTagName("a")).filter((a) => {
-      return a.querySelector("#video-title") || a.id === "video-title";
-    });
-    var spans = Array.prototype.slice.call(document.getElementsByTagName("span")).filter((a) => {
-      return a.id == "video-title" && !a.className.includes("-radio-") && !a.className.includes("-playlist-");
+    var links = Array.prototype.slice.call(document.querySelectorAll("yt-lockup-metadata-view-model h3 a"))
+    var spans = Array.prototype.slice.call(document.querySelectorAll("span")).filter((el) => {
+      return el.id == "video-title" && !el.className.includes("-radio-") && !el.className.includes("-playlist-");
     });
     links = links.concat(spans);
 
@@ -78,6 +82,7 @@
     //console.log('FETCHED ALL VIDEO IDs...');
 
     if (links.length > 0 || mainVidID != "") {
+      //console.log('SHOULD FETCH TITLES?');
       if (APIFetchIDs.length > 0) {
         //console.log('FETCHING TITLES...');
 
@@ -112,7 +117,7 @@
         }
       }
 
-      //console.log(cachedTitles);
+      console.log(cachedTitles);
       //console.log(cachedDescriptions);
 
       // Begin to update the DOM
@@ -200,7 +205,9 @@
   while (true) {
     try {
       await changeTitles();
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
 
     await wait(5000);
   }
