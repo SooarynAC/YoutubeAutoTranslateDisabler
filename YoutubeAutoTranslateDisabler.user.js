@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Auto-Translate Disabler
 // @namespace    https://github.com/SooarynAC/YoutubeAutoTranslateDisabler/
-// @version      0.2
+// @version      0.1
 // @description  Remove auto-translated youtube titles
 // @author       Pierre Couy, Soaryn
 // @match        https://www.youtube.com/*
@@ -68,10 +68,14 @@
     var links2 = Array.prototype.slice.call(document.querySelectorAll("a#video-title")).filter(el => {
       return !el.href.includes('/shorts/')
     })
+    var links3 = Array.prototype.slice.call(document.querySelectorAll("a#video-title-link")).filter(el => {
+      return !el.href.includes('/shorts/')
+    })
     var spans = Array.prototype.slice.call(document.querySelectorAll("span")).filter((el) => {
       return el.id == "video-title" && !el.className.includes("-radio-") && !el.className.includes("-playlist-");
     });
     links = links.concat(links2);
+    links = links.concat(links3);
     links = links.concat(spans);
 
     // MAIN VIDEO DESCRIPTION - request to load original video description
