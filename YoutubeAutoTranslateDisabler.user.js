@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Auto-Translate Disabler
 // @namespace    https://github.com/SooarynAC/YoutubeAutoTranslateDisabler/
-// @version      0.1
+// @version      0.3
 // @description  Remove auto-translated youtube titles
 // @author       Pierre Couy, Soaryn
 // @match        https://www.youtube.com/*
